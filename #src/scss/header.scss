@@ -1,0 +1,233 @@
+// ??? скролл в бургере работает не корректно, скроллируется то что под меню
+
+.header {
+	// фон шапки
+	background-color: $brand-c1;
+
+	// закрепление шапки
+
+	position: fixed; // убрать паддинг в враппере
+	width: 100%;
+	top: 0;
+	left: 0;
+	z-index: 50;
+
+	&__container {
+		position: relative; // для позиционирования выпадающего меню пользователя
+		display: flex; // в строку элементы хеадера
+		align-items: center; // выравнимание элементов по вертикали по центру
+		height: 50px; // высота блока header - 50px
+		@media (max-width: $md3+px) {
+			justify-content: space-between;
+		}
+	}
+
+	&__logo {
+		display: none;
+		// логотип выносится на верх плашки, которая закрывает шапку
+		position: relative; // он позиционируется абсолютно при мобильном разрешении
+		z-index: 2;
+		width: 144px; // ширина логотипа
+
+		// когда появляется бургер лого центрируется
+		@media (max-width: $md3+px) {
+			// абсолютное позиционирование по центру блока родителя, т.е. хедера
+			// чтобы не лохматить бабушку, просто ставим точно в абсолют
+			margin-top: 20px;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+		}
+	}
+
+	&__menu {
+	}
+
+	&__actions {
+	}
+}
+
+.menu {
+	// padding: 0px 0px 0px 30px/950px * 100%; // масштабируемый отступ у блока меню
+	padding: 0px;
+	flex: 1 1 auto; // блок меню прижиматель вправо shrink - 1 grows - 1 позволяем блоку увеличиваться
+	@media (max-width: $md3+px) {
+		// убирание прижиматателя меню - главенства
+		flex: 0 0 auto;
+	}
+	&__icon {
+	}
+
+	&__body {
+		@media (max-width: $md3+px) {
+			// при появлении бургер-меню - делаем полупрозрачный фон
+			background-color: $brand-c1; //rgba(28, 36, 42, 0.98)
+			position: fixed; // точные координаты меню
+			width: 100%; // ширина на всю ширину экрана
+			height: 100%; // высота тоже
+			left: 0; // в левый верхний угол
+			top: 0;
+			overflow: auto; // чтобы была прокрутка меню если не помещается
+			padding: 120px 0px 20px 0px; // общий фрейм меню
+			opacity: 0; // изначально меню не включено
+			visibility: hidden; // и не откликается
+			transition: all 0.5s ease 0s;
+			text-align: center; // пункты меню по центру - inline-block у региона центрирует тоже
+			// элемент плашка, который закрывает весь элемент хеадер
+			// делается для того чтобы меню уезжало под плашку, если так не сделать меню будет по плашке которая создается в начале
+			&:after {
+				content: ""; // без этого параметра не показывается
+				background-color: $brand-c1;
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 50px; // высота хедера,
+			}
+			// в режиме активном оно включается, управляется js
+			&._active {
+				opacity: 1;
+				visibility: visible;
+				color: $brand-c2;
+			}
+		}
+	}
+
+	&__list {
+		display: flex; // меню в строку
+		justify-content: center; // центрируем в центре блока
+		li {
+			margin: 0px 15px; // отступы у пунктов меню слева справа 15
+		}
+		@media (max-width: $md3+px) {
+			// флекс строка уже не нужна - просто делаем блок
+			display: block;
+			li {
+				margin: 0px 0px 30px 0px; // нижний отступ 30, у последнего не делаем
+				&:last-child {
+					margin: 0;
+				}
+			}
+		}
+	}
+
+	// блок пунктов менб
+	&__link {
+		font-size: 18px;
+		font-family: "PFDin";
+		text-transform: uppercase; // все большие буквы
+		letter-spacing: 1px; // расстояние между буквами
+		color: $brand-c3;
+		font-weight: 500;
+		transition: color 0.3s ease 0s;
+		// подчеркивание для компьютеров, на мобилках нет
+		&._active {
+			color: $brand-c2;
+		}
+		@media (min-width: $md2+px) {
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+		@media (max-width: $md3+px) {
+			// размер ссылок делаем больше
+			font-size: 30px;
+		}
+	}
+}
+
+// === бургер
+.icon-menu {
+	// установочные параметры бургера
+
+	$burgerwidth: 30;
+	$burgerheigth: 18;
+	$burgerlineheigth: 3;
+	position: relative; // бургер стал частью флекса хедера --- на мобилке лого отцентрируем
+	width: $burgerwidth + px;
+	height: $burgerheigth + px;
+	cursor: pointer; // указываем что указатель мыши рука
+	z-index: 5;
+	// при 767 включаем бургер
+	@media (max-width: $md3+px) {
+		position: relative; // бургер стал частью флекса хедера --- на мобилке лого отцентрируем
+		width: $burgerwidth + px;
+		height: $burgerheigth + px;
+		cursor: pointer; // указываем что указатель мыши рука
+		z-index: 5;
+		// три спана и три полоски
+		span {
+			@include anim(0.3s, 0s); // плавное изменение
+			top: $burgerheigth/2 - $burgerlineheigth/2 + px; // это средняя полоска выравнивается по центру и смещается на полширины
+			left: 0px; // в нашем случае ставим в 0
+			position: absolute; // привязываем в блоке на место
+			width: 100%; // растягиваем на ширину блока
+			height: $burgerlineheigth + px; // высота полоски
+			background-color: $brand-c3; // подбираем цвет полосок бургера
+			// первая полоска вверх
+			&:first-child {
+				top: 0px;
+			}
+			// последняя полоска вниз
+			&:last-child {
+				// верхний отступ автоматически и прижимаем к низу
+				top: auto;
+				bottom: 0px;
+			}
+		}
+		&._active {
+			span {
+				// миксин выключает среднюю
+				@include scale(0);
+				// а первая поворачивается на 45 град
+				&:first-child {
+					@include rotate(-45deg);
+					top: $burgerheigth/2 - $burgerlineheigth/2 + px; // смещаем вниз на полвысоты меню - полвысоты полоски бургера
+				}
+				&:last-child {
+					@include rotate(45deg);
+					bottom: $burgerheigth/2 - $burgerlineheigth/2 + px; // смещаем вверх на полвысоты меню - полвысоты полоски бургера
+				}
+			}
+		}
+	}
+}
+
+.actions-header {
+	display: flex; // элементы в строку - иконка и пункт выбора меню
+	align-items: center;
+
+	&__region {
+		@extend .menu__link; // повторяет стиль пунктов меню
+
+		// тоже достаем поверх плашки которая в бургер-моде закрывает хеадер
+		// и регион является родителем для выпадающего меню
+		// по правой его границе выравниваем наше выпадающее меню
+		position: relative;
+		z-index: 2;
+		padding: 0px 0px 0px 30px; // отступаем вправо для того чтобы иконка стала слева
+		line-height: 18px; // делаем высоту строки текста из-за высоты иконки 18px
+		// когда выключим спан с текстом, то БГ останется, т.е. оставляем иконку
+		min-width: 18px; // ширина и высота иконки
+		min-height: 18px;
+		background: url("../img/icons/globe.png") left no-repeat; // иконка ставится на фон
+
+		@media (max-width: 890px) {
+			padding: 0; // обнуляем отступы - чтобы не было слева отступа у иконки региона
+			span {
+				display: none; // выключаем текст "ВЫБОР РЕГИОНА"
+			}
+		}
+		@media (max-width: $md3+px) {
+			// после перепрыгивания региона в бургер позиционируем его
+			margin-top: 50px;
+			padding-left: 30px;
+			// блочным делаем чтобы центровался при text-align: center;
+			display: inline-block;
+			span {
+				display: inline-block;
+			}
+		}
+	}
+}

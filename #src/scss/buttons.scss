@@ -1,0 +1,170 @@
+// === BUTTONS (a.btn+tab)
+// есть ссылка кнопка с классом .btn
+// граница выстроена псевдоэлементами
+// внутри еще один спан с градиентами побокам
+
+.btn {
+	display: inline-block;
+	padding: 0px 0px;
+	height: 47px;
+	padding: 0px 42px;
+	background-color: $brand-c1;
+	line-height: 44px;
+	font-weight: 700;
+	text-transform: uppercase;
+	font-size: 16px;
+	border-radius: 23px;
+	text-transform: uppercase;
+	letter-spacing: 0.67px;
+	position: relative;
+	&:after {
+		content: "";
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		@include scale(0);
+		@include anim(0.3s, 0s);
+	}
+	&_w {
+		color: $brand-c3;
+		border: 1px solid #fff;
+		&:after {
+			background-color: #ff0;
+		}
+	}
+	&_b {
+		color: #000;
+		border: 1px solid #000;
+		&:after {
+			background-color: #000;
+		}
+	}
+
+	span {
+		@include anim(0.3s, 0s);
+		position: relative;
+		z-index: 1;
+	}
+	&:hover {
+		// border-radius: 20px;
+		&.btn_w {
+			color: #000;
+		}
+		&.btn_b {
+			color: #fff;
+		}
+		&:after {
+			border-radius: 23px;
+			@include scale(1);
+		}
+	}
+	&.fw {
+		width: 100%;
+	}
+}
+/*
+.btn {
+	// .btn_body
+	position: relative;
+	display: inline-block;
+	border-radius: 50%;
+	&:before,
+	&:after {
+		// position: absolute;
+		// left: 0;
+		// width: 100%;
+		// height: 3px;
+		// content: "";
+	}
+	&:before {
+		top: 0; // выравниваем по верху
+		background-color: $brand-c2;
+	}
+	&:after {
+		bottom: 0; // выравниваем по низу
+		background-color: $brand-c3;
+	}
+	&__body {
+		// padding: 0px 0px;
+
+		&:before,
+		&:after {
+			// content: "";
+			// position: absolute;
+			// top: 0;
+			// height: 100%;
+			// width: 3px;
+			// background-image: linear-gradient(to top, $brand-c3 0%, $brand-c2 100%);
+		}
+		&:before {
+			left: 0;
+		}
+		&:after {
+			right: 0;
+		}
+		span {
+			color: $brand-c3;
+			background-color: yellow;
+			border-radius: 25px;
+			font-size: 20px;
+			font-family: "PFDin";
+			font-weight: 700;
+			text-transform: uppercase;
+			letter-spacing: 2px;
+			display: flex; // inline-flex; // я так понимаю что это блок флекс одного элемента если инлайн, спан болтается внутри и меньше чем кнопка
+			justify-content: center;
+			align-items: center;
+			padding: 0 50px; // вытягиваем кнопку в стороны
+			position: relative;
+			min-height: 50px; // для inline-flex все равно что так что height
+			&:after {
+				content: "";
+				height: 50%;
+				opacity: 0.8;
+				border-radius: 25px;
+				// transition: all 0.5s ease 0s;
+				@include scale(0);
+				@include anim(0.3s, 0s);
+				// background-image: linear-gradient(to top, $brand-c1 0%, rgba(187, 156, 102, 0) 100%);
+				top: 25%;
+				left: 0;
+				position: absolute;
+				width: 100%;
+			}
+			&:before {
+			}
+		}
+	}
+
+	&_big {
+		// модивикатор big для кнопки действует только для span этого класса
+		.btn__body span {
+			letter-spacing: 0px;
+			font-size: 21px;
+			color: #000;
+			font-weight: 500;
+			padding: 0 10px; // вытягиваем кнопку в стороны
+		}
+	}
+
+	@media (min-width: 992px) {
+		&:hover {
+			.btn__body span {
+				&:after {
+					top: 0%;
+					height: 100%;
+					transition: all 0.6s ease 0s;
+					opacity: 0.4;
+				}
+			}
+		}
+	}
+
+	&.fw {
+		width: 100%;
+	}
+}
+// === /BUTTONS
+*/

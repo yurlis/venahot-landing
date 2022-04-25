@@ -1,0 +1,149 @@
+.offers {
+	margin: 50px 0px 70px 0px;
+	@media (max-width: 767px) {
+		margin: 0px 0px 35px 0px;
+	}
+
+	/* .offers__items */
+	&__items {
+		margin: 0px 0px 85px 0px;
+		@media (max-width: 767px) {
+			margin: 0px 0px 0px 0px;
+		}
+	}
+
+	/* .offers__container */
+	&__container {
+	}
+
+	/* .offers__row */
+	&__row {
+		display: flex;
+		position: relative;
+		align-items: stretch;
+		flex-wrap: wrap; // чтобы элементы переносились
+		background-color: $brand-c3;
+		// они сделаны в row колонками column
+		// justify-content: center;
+		margin: 0px -50px 0px;
+		padding: 33px 0px 0px 0px;
+		&:before,
+		&:after {
+			content: "";
+		}
+		&:before {
+		}
+		&:after {
+		}
+	}
+
+	/* .offers__column */
+	&__column {
+		padding: 0px 25px 0px;
+		flex: 0 1 100/3+0%; // делим на три колонки
+		width: 100/3+0%;
+		margin: 0px 0px 25px 0px;
+		position: relative;
+		display: flex; // центрация в колонке
+		align-items: center;
+		flex-direction: column;
+		justify-content: center;
+		// align-items: center;
+		height: 100%;
+		background-color: $brand-c2;
+		&:before {
+			// ставим точку внизу под элементом
+			content: "";
+		}
+		@media (max-width: 975px) {
+			flex: 0 1 50%; // переходим на 2 колонки делим пополам
+			width: 50%;
+		}
+		@media (max-width: 650px) {
+			flex: 1 1 100%; // переходим на 1 колонку делим пополам
+		}
+	}
+
+	/* .categories__item */
+	&__element {
+		padding: 10px;
+		background-color: $brand-c1;
+	}
+
+	/* .categories__item */
+
+	&__item {
+		flex: 0 0 auto;
+	}
+
+	/* .categories__decor */
+	&__text {
+		font-size: 14px;
+		color: #000;
+	}
+}
+
+// === categories
+.item {
+	position: relative;
+	// padding: 30px 30px 40px 30px;
+	text-align: center;
+	height: 250px;
+	width: 250px;
+	overflow: hidden;
+	@media (min-width: 992px) {
+		&:hover {
+			// применяем к внутреннему элементу
+			.item__bg {
+				transform: scale(1.1);
+			}
+		}
+	}
+}
+
+.item__icon {
+	position: relative;
+	z-index: 2;
+	margin: 0px 0px 22px 0px;
+}
+
+.item__title {
+	// letter-spacing: 1px;
+	position: relative;
+	flex: 1 1 auto; // если текст двустрочный
+	width: 100%;
+	z-index: 2;
+	color: $brand-c2;
+	font-size: 21px;
+	line-height: calc(25 / 21);
+	font-weight: 500;
+	text-transform: uppercase;
+	font-family: "PFDin";
+	margin: 0px 0px 27px/21px * 1em 0px;
+}
+
+.item__bg {
+	transition: transform 0.8s ease 0s;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	// img {
+	// 	width: 100%;
+	// 	height: 100%;
+	// 	object-fit: cover;
+	// 	position: absolute;
+	// 	top: 0;
+	// 	left: 0;
+	// }
+	&:after {
+		content: "";
+		position: absolute;
+		// width: 100%;
+		// height: 100%;
+		// top: 0;
+		// left: 0;
+		// background-color: rgba(0, 0, 0, 0.7);
+	}
+}

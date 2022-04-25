@@ -1,0 +1,72 @@
+@import "mixins.scss";
+@import "vars.scss";
+
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,700&display=swap&subset=cyrillic-ext");
+@import url("https://fonts.googleapis.com/css?family=PT+Sans+Narrow:regular&display=swap&subset=cyrillic-ext");
+
+@import "fonts.scss";
+$fontfamily: "PT Sans";
+
+$minwidth: 320px;
+$mw: 970; // макет 950 px - 10-10 паддинги в _container
+$md1: $mw + 12;
+$md2: 991.98;
+$md3: 767.98;
+$md4: 479.98;
+
+// === обнуление
+@import "null.scss";
+body {
+	color: #000;
+	font-size: 14px;
+	&.lock {
+		overflow: hidden;
+	}
+}
+// === / обнуление
+
+// === оболочка
+.wrapper {
+	width: 100%;
+	min-height: 100vh;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	&.loaded {
+	}
+}
+// === / оболочка
+
+// === основной контейнер
+._container {
+	max-width: $mw + px;
+	margin: 0 auto;
+	padding: 0px 10px 0px 10px;
+	// в стартовом шаблоне меняется ширина контейнера, контент прыгает
+}
+// === / основной контейнер
+
+// === основной блок
+
+.page {
+	// 75пикселей отступ потому что шапка нависает - нужно отступить
+	// padding: 50px 0px 0px 0px; // если меню фиксированое - паддинг то
+	padding: 0px 0px 0px 0px; // если меню фиксированое - паддинг то
+	flex: 1 1 auto;
+}
+
+// === / основной блок
+@import "ui";
+@import "animate";
+// @import "forms";
+
+@import "buttons";
+@import "swiper";
+@import "header";
+@import "first-next";
+@import "brands";
+@import "offers1";
+@import "pm";
+@import "subscribe";
+@import "footer";
