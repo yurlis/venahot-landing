@@ -45,7 +45,7 @@ HTML, CSS, JavaScript, SCSS, jQuery, GULP
 
 ### Landing 2
 
-<p align="center"><img src="./readme_assets/sc-2-1.jpg" width="100%"></p>
+<p align="center"><img src="./readme_assets/sc-4-1.jpg" width="100%"></p>
 
 <h3 align="center"><a  href="http://yurylisovsky.colocall.com/portfolio/landing4/">Watch project</a></h3>
 <h3 align="center"><a  href="https://github.com/yurlis/landing4-luxshop">Go to Landing project on GitHub</a></h3>
